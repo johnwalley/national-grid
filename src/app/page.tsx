@@ -56,10 +56,9 @@ export default async function Home() {
   const groupBy = "30m";
   const ts = `${Date.now()}`;
 
-  // &_ts=1726075651049
-
   let data = await fetch(
-    `https://drax-production.herokuapp.com/api/1/generation-mix?date_from=${dateFrom}&date_to=${dateTo}&group_by=${groupBy}&_ts=${ts}`
+    `https://drax-production.herokuapp.com/api/1/generation-mix?date_from=${dateFrom}&date_to=${dateTo}&group_by=${groupBy}&_ts=${ts}`,
+    { next: { revalidate: 30 * 60 } }
   );
 
   let generationMix = await data.json();
