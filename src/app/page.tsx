@@ -1,3 +1,5 @@
+import { format } from "date-fns-tz";
+
 const generationType = {
   solar: "Solar",
   wind: "Wind",
@@ -51,8 +53,14 @@ const daysFromToday = (n: number) => {
 };
 
 export default async function Home() {
-  const dateFrom = daysFromToday(-1).toISOString();
-  const dateTo = new Date().toISOString();
+  const dateFrom = format(daysFromToday(-1), "yyyy-MM-dd HH:mm:ss", {
+    timeZone: "Europe/London",
+  });
+
+  const dateTo = format(new Date(), "yyyy-MM-dd HH:mm:ss", {
+    timeZone: "Europe/London",
+  });
+
   const groupBy = "30m";
   const ts = `${Date.now()}`;
 
