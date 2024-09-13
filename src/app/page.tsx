@@ -53,16 +53,24 @@ const daysFromToday = (n: number) => {
 };
 
 export default async function Home() {
+  console.log("Now", new Date());
+
   const dateFrom = format(daysFromToday(-1), "yyyy-MM-dd HH:mm:ss", {
     timeZone: "Europe/London",
   });
+
+  console.log("dateFrom", dateFrom);
 
   const dateTo = format(new Date(), "yyyy-MM-dd HH:mm:ss", {
     timeZone: "Europe/London",
   });
 
+  console.log("dateTo", dateTo);
+
   const groupBy = "30m";
   const ts = `${Date.now()}`;
+
+  console.log("ts", ts);
 
   let data = await fetch(
     `https://drax-production.herokuapp.com/api/1/generation-mix?date_from=${dateFrom}&date_to=${dateTo}&group_by=${groupBy}&_ts=${ts}`,
